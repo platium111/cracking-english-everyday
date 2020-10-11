@@ -12,3 +12,6 @@
 - webpack.config.mjs
 - script using webpac with --config
 - type: module in package.json
+
+- setting proxy server
+- setting webpack
