@@ -75,3 +75,29 @@ module.exports = {
   ],
 };
 ```
+
+4. Eslint
+
+```
+{
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error", { "endOfLine": "auto" }] // fixing ; at end of the line
+  },
+  "parserOptions": { // fixing reverse const keyword
+    "ecmaVersion": 2017
+  },
+  "env": {
+    "es6": true
+  },
+  "parser": "babel-eslint" // fixing arrow function errors
+}
+}
+```
+
+5.package.json
+`"server": "node-env-run server --exec nodemon | pino-colada",` // with `server` is package, it will find index.js as default
+
+- `node-env-run` is used to load env config before running something, using with --exect nodemon to run something -`npm-run-all` run multiple script
+
+
