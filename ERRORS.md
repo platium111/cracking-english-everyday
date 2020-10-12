@@ -15,3 +15,10 @@
 
 - setting proxy server
 - setting webpack
+
+12/10
+
+- [e_fix_200ok_but_not_get_sentences_data]
+  because query I have `http://..../vi \n",` -> careful with breakline in quote mark
+- [n_print_nested_obj]
+  `util.inspect(obj, {showHidden: false, depth: null})`

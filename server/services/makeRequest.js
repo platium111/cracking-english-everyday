@@ -6,11 +6,7 @@ const API_KEY = 'WBBcwnwQpV89';
 // }
 
 exports.getSentences = async (args) => {
-  const fullUrl = `https://api.tracau.vn/${API_KEY}/s/${encodeURI(args.searchValue)}/${args.languageTarget};
-  `;
-
-  /* const urlEncoded = encodeURIComponent(fullUrl); */
-  // console.log(urlEncoded);
+  const fullUrl = `https://api.tracau.vn/${API_KEY}/s/${encodeURI(args.searchValue)}/${args.languageTarget}`;
 
   const headers = {
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
@@ -19,10 +15,11 @@ exports.getSentences = async (args) => {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'Access-Control-Allow-Credentials': 'true',
+    'User-Agent':
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/8.0.7 Safari/600.7.12',
   };
   try {
     const result = await axios.get(fullUrl, { headers });
-    console.log('result', result);
     return result;
   } catch (err) {
     console.log(err);

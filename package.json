@@ -9,6 +9,7 @@
     "server": "node-env-run server --exec nodemon | pino-colada",
     "proxy": "http://localhost:3001",
     "dev": "run-p server start",
+    "debug": "node --inspect ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
