@@ -34,3 +34,10 @@
 - [e_ts_import_scss]
   "typeRoots": ["node_modules/@types", "src/typings"],
   in tsconfig
+
+- [e_fix_proxy_nodejs] using app.use with res.header with ` res.header('Access-Control-Allow-Headers', '*')`
+
+- [e_webpack_scss] fixing scss with webpack config
+  [ref](https://medium.com/better-programming/how-to-set-up-a-react-project-using-webpack-typescript-and-sass-74914421158a)
+
+- [e_fix_html-parser_ts] using tsconfig with `type: node` and typeRoots
