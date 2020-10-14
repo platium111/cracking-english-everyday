@@ -1,6 +1,7 @@
 https://www.smashingmagazine.com/2020/05/typescript-modern-react-projects-webpack-babel/
 
 1. ts.config.json
+   ```
    {
    "compilerOptions": {
    "jsx": "react", // support jsx in .tsx file ~ mean can write jsx code
@@ -14,8 +15,16 @@ https://www.smashingmagazine.com/2020/05/typescript-modern-react-projects-webpac
    },
    "include": [
    "src/index.tsx" // -> specify file list is included
-   ]
+   ],
+   "typeRoots": ["node_modules/@types", "src/typings"], // fix typescript with other libraries
+    "types": ["node"] // this one also fix some libs typescript
    }
+   ```
+
+-@types/react-html-parser
+-"react-html-parser"
+-"@types/domhandler"
+-"@types/node"
 
 2. import lib
 
@@ -60,9 +69,16 @@ module.exports = {
         loader: 'source-map-loader',
       },
       {
-        test: /\.css$/,
-        loader: 'css-loader',
-      },
+      test: /\.s(a|c)ss$/,
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: { modules: true }
+        },
+        'sass-loader'
+      ]
+      }
     ],
   },
   plugins: [
@@ -100,4 +116,9 @@ module.exports = {
 
 - `node-env-run` is used to load env config before running something, using with --exect nodemon to run something -`npm-run-all` run multiple script
 
-
+webpack config scss
+-"css-modules-typescript-loader"
+-"node-sass" -> using to load scss file which using C language
+-"sass-loader" -> using in webpack rule | using for scss/sass convert to css
+-"css-loader" -> take css file with imports and url for webpack
+-"style-loader" -> inject css to DOM

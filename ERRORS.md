@@ -22,3 +22,15 @@
   because query I have `http://..../vi \n",` -> careful with breakline in quote mark
 - [n_print_nested_obj]
   `util.inspect(obj, {showHidden: false, depth: null})`
+
+14/10/2020
+
+- [e_domhandler_webpack_ts]
+  "types": ["node"] in tsconfig will fix errors
+  npm install @types/node --save-dev
+
+  [ref](https://stackoverflow.com/questions/54232428/cannot-find-type-definition-file-for-node-in-typescript-react-app)
+
+- [e_ts_import_scss]
+  "typeRoots": ["node_modules/@types", "src/typings"],
+  in tsconfig

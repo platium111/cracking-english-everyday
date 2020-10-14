@@ -9,12 +9,22 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(pino);
 
+// proxy
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*'); // this makes it word
+  next();
+});
+
 // req.query.firstName
 app.get('/', async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   try {
-    const result = await services.getSentences({ searchValue: 'lan', languageTarget: 'en' });
-    res.send(util.inspect(result.data, { showHidden: false, depth: null }));
+    const { searchValue, languageTarget } = req?.query || {};
+    const result = await services.getSentences({ searchValue, languageTarget });
+    // res.send(util.inspect(result.data, { showHidden: false, depth: null }));
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result.data));
   } catch (err) {
     console.log(err);
   }
