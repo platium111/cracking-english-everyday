@@ -41,3 +41,7 @@
   [ref](https://medium.com/better-programming/how-to-set-up-a-react-project-using-webpack-typescript-and-sass-74914421158a)
 
 - [e_fix_html-parser_ts] using tsconfig with `type: node` and typeRoots
+
+- using @import in scss
+- define base color using scss
+- useRef and handle Enter for search text
