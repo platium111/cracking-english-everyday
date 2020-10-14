@@ -17,10 +17,13 @@
 }
 
 .foundLanguage {
+  font-weight: 500;
 }
 
 .targetLanguage {
   em {
-    color: red;
+    color: $base_word_red;
+    font-weight: 700;
+    font-size: large;
   }
 }
