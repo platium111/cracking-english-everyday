@@ -2,7 +2,6 @@ import * as React from 'react';
 import { getSentences } from './services';
 import { List } from './components';
 import styles from './App.style.scss';
-
 export interface MainAppProps {
   appName: string;
 }
@@ -10,6 +9,7 @@ export interface MainAppProps {
 export const App = (props: MainAppProps) => {
   const [sentenceData, setSentenceData] = React.useState([]);
   const searchTextRef = React.useRef(null);
+  const [targetLanguage, setTargetLanguage] = React.useState('vi');
 
   const fetchSentences = async (searchValue: string, languageTarget: string) => {
     const result = await getSentences({ searchValue, languageTarget });
@@ -23,8 +23,16 @@ export const App = (props: MainAppProps) => {
 
   async function handleKeyDown(e: any) {
     if (e.key === 'Enter') {
-      await fetchSentences(searchTextRef?.current?.value, 'vi');
+      const searchText = searchTextRef?.current?.value;
+      if (searchText) {
+        await fetchSentences(searchTextRef?.current?.value, targetLanguage);
+      }
     }
+  }
+
+  function handleSelect(e: any) {
+    console.log(e.target.value);
+    setTargetLanguage(e.target.value);
   }
 
   return (
@@ -32,8 +40,14 @@ export const App = (props: MainAppProps) => {
       <h1>{props.appName}</h1>
       <div className={styles.centerFlex}>
         <input ref={searchTextRef} onKeyDown={handleKeyDown} className={styles.input} placeholder="Search..."></input>
+        <select onChange={handleSelect}>
+          <option value="vi">Vietnamese</option>
+          <option value="en">English</option>
+        </select>
       </div>
-      <List data={sentenceData as any} />
+      <div className={styles.centerFlex}>
+        <List data={sentenceData as any} />
+      </div>
     </div>
   );
 };

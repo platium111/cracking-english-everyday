@@ -16,7 +16,7 @@ export default function ({ data }: IListProps) {
       {data?.sentences?.map((item) => {
         return (
           <div key={item._id} className={styles.item}>
-            <span className={styles.foundLanguage}>{item.fields.en}</span>
+            <span className={styles.foundLanguage}>{ReactHtmlParser(item.fields.en)}</span>
             <span className={styles.targetLanguage}>{ReactHtmlParser(item.fields.vi)}</span>
           </div>
         );
