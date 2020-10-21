@@ -50,3 +50,8 @@
 
 - [e_franc_typescript] fix using import \* as fran from 'franc'
 - 2 languages selection
+
+21/10/2020
+
+- add babel
+- having webpack build

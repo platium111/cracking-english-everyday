@@ -1,2 +1,9 @@
 [1010/133746.884:ERROR:file_io.cc(90)] ReadExactly: expected 36, observed 0
 [1015/191608.831:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1016/191608.835:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1017/191611.266:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1018/123037.884:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Clark\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\6eb4a9ad-84a7-42bf-88ac-5bde1cceb7f1: The system cannot find the path specified. (0x3)
+[1018/191612.990:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1019/191614.721:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1020/191616.423:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1021/191618.135:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
