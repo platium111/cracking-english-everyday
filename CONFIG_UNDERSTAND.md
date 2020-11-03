@@ -114,7 +114,8 @@ module.exports = {
 5.package.json
 `"server": "node-env-run server --exec nodemon | pino-colada",` // with `server` is package, it will find index.js as default
 
-- `node-env-run` is used to load env config before running something, using with --exect nodemon to run something -`npm-run-all` run multiple script
+- `node-env-run` is used to load env config before running something, using with --exect nodemon to run something -`npm-run-all` run multiple script, shortcut `run-p` means run parallel
+  * `node-env-run server --exec` is used to run something else, instead of `node`
 
 webpack config scss
 -"css-modules-typescript-loader"
