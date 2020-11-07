@@ -55,3 +55,14 @@
 
 - add babel
 - having webpack build
+
+7/11/2020
+
+- amplify commands
+
+* amplify function build
+* amplify mock function lookupsentencefunction
+* amplify push
+* amplify publish
+
+- [e_lastPushTimeStamp]

@@ -1,0 +1,48 @@
+{
+    "paths": [
+        {
+            "name": "/lookup",
+            "lambdaFunction": "lookupsentencefunction",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "dictionarySentenceApi",
+    "apiName": "dictionarySentenceApi",
+    "functionArns": [
+        {
+            "lambdaFunction": "lookupsentencefunction"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "amplify-crackingenglishevery-dev-113041-authRole",
+        "unAuthRoleName": "amplify-crackingenglishevery-dev-113041-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "lookupsentencefunction",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

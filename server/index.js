@@ -2,7 +2,6 @@ const services = require('./services/makeRequest');
 const express = require('express');
 const bodyParser = require('body-parser');
 const pinoLib = require('express-pino-logger');
-const util = require('util');
 const pino = pinoLib();
 
 const app = express();
