@@ -31,18 +31,25 @@ app.use(function (req, res, next) {
  * Example get method *
  **********************/
 
-app.get('/lookup', async function (req, res) {
+app.get('/lookup', function (req, res) {
   // Add your code here
   // res.json({success: 'get call succeed!', url: req.url});
-  try {
-    const { searchValue, languageTarget } = req?.query || {};
-    const result = await services.getSentences({ searchValue, languageTarget });
-    // res.send(util.inspect(result.data, { showHidden: false, depth: null }));
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(result.data));
-  } catch (err) {
-    console.log(err);
-  }
+  console.info('go to lookup function');
+  /* var searchValue = req.query.searchValue;
+  var languageTarget = req.query.languageTarget; */
+  // console.info('query lookup function', searchValue, languageTarget);
+  services
+    .getSentences({ searchValue: 'chan', languageTarget: 'vi' })
+    .then((result) => {
+      // res.send(util.inspect(result.data, { showHidden: false, depth: null }));
+      console.info('--goto result--', result);
+      res.setHeader('Content-Type', 'application/json');
+      res.end(JSON.stringify(result.data));
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
 });
 
 app.get('/lookup/*', function (req, res) {

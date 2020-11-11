@@ -69,7 +69,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-crackingenglishevery-dev-113041-deployment",
-					"S3Key": "amplify-builds/lookupsentencefunction-4951564458596439734c-build.zip"
+					"S3Key": "amplify-builds/lookupsentencefunction-4d666d71574a41465379-build.zip"
 				}
 			}
 		},

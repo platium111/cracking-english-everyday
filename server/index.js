@@ -17,7 +17,6 @@ app.use(function (req, res, next) {
 
 // req.query.firstName
 app.get('/', async (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
   try {
     const { searchValue, languageTarget } = req?.query || {};
     const result = await services.getSentences({ searchValue, languageTarget });
