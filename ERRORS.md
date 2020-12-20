@@ -72,4 +72,4 @@ X separte webpack file | https://stackoverflow.com/questions/49348365/webpack-4-
   [768, 992) is small size
   [992, 1200) is medium size
   [1200, end] large
-
+X read more about code-splitting | https://webpack.js.org/guides/code-splitting/

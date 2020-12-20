@@ -1,8 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV === 'development';
+const options = { fileName: 'asset-manifest.json' };
 
 module.exports = {
   entry: {
@@ -14,11 +17,6 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
     chunkFilename: '[id].js',
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
   },
   performance: {
     hints: false,
@@ -85,5 +83,11 @@ module.exports = {
       filename: isDevelopment ? '[name].css' : '[name].[hash].css',
       chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
     }),
+    new WebpackManifestPlugin(options),
+    new CopyPlugin([
+      { from: path.resolve(__dirname, 'public', 'manifest.json'), to: path.resolve(__dirname, 'build') },
+      { from: path.resolve(__dirname, 'public', 'logo192.png'), to: path.resolve(__dirname, 'build') },
+      { from: path.resolve(__dirname, 'public', 'logo512.png'), to: path.resolve(__dirname, 'build') },
+    ]),
   ],
 };
