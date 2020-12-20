@@ -5,7 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isDevelopment = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src', 'index.tsx'),
+  entry: {
+    index: path.resolve(__dirname, 'src', 'index.tsx'),
+  },
   target: 'web',
   mode: 'production',
   output: {
@@ -13,6 +15,17 @@ module.exports = {
     filename: 'bundle.js',
     chunkFilename: '[id].js',
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 400000,
+    maxAssetSize: 400000,
+  },
+  devtool: 'inline-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx', '.scss'],
   },

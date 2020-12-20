@@ -65,4 +65,11 @@
 * amplify push
 * amplify publish
 
-- [e_lastPushTimeStamp]
+20/12/2020
+X separte webpack file | https://stackoverflow.com/questions/49348365/webpack-4-size-exceeds-the-recommended-limit-244-kib
+- [webpack_max_size] using hints to false and set maxSizeAsset...
+- screen size with bootstrap responsive | https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp
+  [768, 992) is small size
+  [992, 1200) is medium size
+  [1200, end] large
+

@@ -1,11 +1,17 @@
 @import '../../_foundation/globalVariables.scss';
 
 .list {
+  display: flex;
+  flex-direction: column;
   margin-top: 20px;
   border-radius: 4px;
   border-style: none;
   border: 1px solid $base_color_level1_green;
-  width: 60%;
+  width: 100%;
+
+  @media screen and (min-width: $screen_size_sm) {
+    width: 40%;
+  }
 
   .item:last-of-type {
     border-bottom: none;

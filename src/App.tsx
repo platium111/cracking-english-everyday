@@ -21,7 +21,7 @@ export const App = (props: MainAppProps) => {
     fetchSentences('kĩ năng', 'vi');
   }, []);
 
-  async function handleKeyDown(e: any) {
+  async function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter') {
       const searchText = searchTextRef?.current?.value;
       if (searchText) {
@@ -30,9 +30,15 @@ export const App = (props: MainAppProps) => {
     }
   }
 
-  function handleSelect(e: any) {
-    console.log(e.target.value);
+  function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
     setTargetLanguage(e.target.value);
+  }
+
+  async function handleClick() {
+    const searchText = searchTextRef?.current?.value;
+    if (searchText) {
+      await fetchSentences(searchTextRef?.current?.value, targetLanguage);
+    }
   }
 
   return (
@@ -40,6 +46,7 @@ export const App = (props: MainAppProps) => {
       <h1>{props.appName}</h1>
       <div className={styles.centerFlex}>
         <input ref={searchTextRef} onKeyDown={handleKeyDown} className={styles.input} placeholder="Search..."></input>
+        <button onClick={handleClick}>Tra từ</button>
         <select onChange={handleSelect}>
           <option value="vi">Vietnamese</option>
           <option value="en">English</option>
