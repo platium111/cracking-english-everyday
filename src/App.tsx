@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { getSentences } from './services';
-import { List } from './components';
+import { List, Button, Textfield, Select } from './components';
 import styles from './App.style.scss';
+import globalStyles from './_foundation/globalSpaces.scss';
+
 export interface MainAppProps {
   appName: string;
 }
@@ -45,12 +47,21 @@ export const App = (props: MainAppProps) => {
     <div className={styles.container}>
       <h1>{props.appName}</h1>
       <div className={styles.centerFlex}>
-        <input ref={searchTextRef} onKeyDown={handleKeyDown} className={styles.input} placeholder="Search..."></input>
-        <button onClick={handleClick}>Tra từ</button>
-        <select onChange={handleSelect}>
-          <option value="vi">Vietnamese</option>
-          <option value="en">English</option>
-        </select>
+        <Textfield
+          ref={searchTextRef}
+          onKeyDown={handleKeyDown}
+          className={styles.input}
+          placeholder="Search..."
+        ></Textfield>
+        <Select
+          onChange={handleSelect}
+          className={globalStyles.componentSpace}
+          data={[
+            { label: 'Vietnamese', value: 'vi' },
+            { label: 'English', value: 'en' },
+          ]}
+        ></Select>
+        <Button className={globalStyles.componentSpace} onClick={handleClick} label="Tra từ"></Button>
       </div>
       <div className={styles.centerFlex}>
         <List data={sentenceData as any} />

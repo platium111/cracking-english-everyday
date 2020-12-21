@@ -73,3 +73,8 @@ X separte webpack file | https://stackoverflow.com/questions/49348365/webpack-4-
   [992, 1200) is medium size
   [1200, end] large
 X read more about code-splitting | https://webpack.js.org/guides/code-splitting/
+
+21/12/2020
+- using multiple SCSS in react | className={`${styles.container} ${style.test}`}
+- CSS gradient | https://cssgradient.io/
+- Add Select, Input, Button compoents and styling

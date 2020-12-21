@@ -4,14 +4,11 @@
   margin: 0 auto;
 }
 
+h1 {
+  color: brown
+}
+
 .centerFlex {
   display: flex;
   justify-content: center;
-}
-
-.input {
-  width: 200px;
-  height: 32px;
-  border-radius: 4px;
-  border: 1px solid grey;
 }

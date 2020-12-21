@@ -1,0 +1,15 @@
+@import '../../_foundation/globalActions.scss';
+
+$buttonBackgroundColor: rgb(61,170,200);
+
+.button {
+  color: white;
+  min-width: 80px;
+  border: none;
+  background-color: $buttonBackgroundColor;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: lighten($buttonBackgroundColor, 10%);
+}
