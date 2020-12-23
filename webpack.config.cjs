@@ -3,19 +3,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+require('dotenv').config();
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const options = { fileName: 'asset-manifest.json' };
-
+console.log('clarkdir', __dirname);
 module.exports = {
   entry: {
     index: path.resolve(__dirname, 'src', 'index.tsx'),
+    'index-foreground': ['./src/index-foreground.jsx'],
   },
   target: 'web',
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
+    filename: '[name].js',
     chunkFilename: '[id].js',
   },
   performance: {
@@ -30,7 +32,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
@@ -63,7 +65,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.s(a|c)ss$/,
+        test: /\.s?(a|c)ss$/,
         use: [
           'style-loader',
           {
@@ -74,6 +76,9 @@ module.exports = {
         ],
       },
     ],
+  },
+  optimization: {
+    runtimeChunk: false,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -86,8 +91,13 @@ module.exports = {
     new WebpackManifestPlugin(options),
     new CopyPlugin([
       { from: path.resolve(__dirname, 'public', 'manifest.json'), to: path.resolve(__dirname, 'build') },
-      { from: path.resolve(__dirname, 'public', 'logo192.png'), to: path.resolve(__dirname, 'build') },
-      { from: path.resolve(__dirname, 'public', 'logo512.png'), to: path.resolve(__dirname, 'build') },
+      {
+        from: 'public/*.png',
+        to: 'images/[name].[ext]',
+      },
+      { from: path.resolve(__dirname, 'public', 'test.js'), to: path.resolve(__dirname, 'build') },
+      { from: path.resolve(__dirname, 'public', 'background.js'), to: path.resolve(__dirname, 'build') },
+      { from: path.resolve(__dirname, 'public', 'inject_script.js'), to: path.resolve(__dirname, 'build') },
     ]),
   ],
 };

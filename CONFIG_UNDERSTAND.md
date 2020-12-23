@@ -123,3 +123,10 @@ webpack config scss
 -"sass-loader" -> using in webpack rule | using for scss/sass convert to css
 -"css-loader" -> take css file with imports and url for webpack
 -"style-loader" -> inject css to DOM
+- babel | transpiling from react to Javascript
+  babel/core + babel/plugin-proposal-class-properties(react class -> js) + babel/preset-env (js->js) + babel/preset-react (es6->js) + babel-loader
+  clean-webpack-plugin : for production 
+  copy-webpacl-plugin: using for copy file such as js, images..., not transpiling.
+  html-loader: load html?
+  html-webpack-plugin: take transformed html to directory to local
+  

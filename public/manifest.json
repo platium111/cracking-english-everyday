@@ -4,11 +4,17 @@
   "version": "1.0.0",
   "manifest_version": 2,
   "icons": {
-    "512": "logo512.png"
+    "512": "./images/superdev.png"
   },
   "browser_action": {
-    "default_icon": "logo512.png",
+    "default_icon": "./images/superdev.png",
     "default_popup": "popup.html",
     "default_title": "Open the popup"
-  }
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": ["storage", "declarativeContent", "tabs", "background", "<all_urls>"],
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
 }

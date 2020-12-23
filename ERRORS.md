@@ -78,3 +78,10 @@ X read more about code-splitting | https://webpack.js.org/guides/code-splitting/
 - using multiple SCSS in react | className={`${styles.container} ${style.test}`}
 - CSS gradient | https://cssgradient.io/
 - Add Select, Input, Button compoents and styling
+
+23/12/2020
+- [conflict_bundle_file] in `output` using `[name].bundle.js` |
+https://stackoverflow.com/questions/42148632/conflict-multiple-assets-emit-to-the-same-filename
+- [cannot_load_jsx_webpack] in test rule add more jsx into rule
+- [webpack_generating_css_from_scss] using s?(s|ss) in test rule
+- feat: inject component in every page in chrome using `background`

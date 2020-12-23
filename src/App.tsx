@@ -8,7 +8,7 @@ export interface MainAppProps {
   appName: string;
 }
 
-export const App = (props: MainAppProps) => {
+export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) => {
   const [sentenceData, setSentenceData] = React.useState([]);
   const searchTextRef = React.useRef(null);
   const [targetLanguage, setTargetLanguage] = React.useState('vi');
@@ -61,7 +61,7 @@ export const App = (props: MainAppProps) => {
             { label: 'English', value: 'en' },
           ]}
         ></Select>
-        <Button className={globalStyles.componentSpace} onClick={handleClick} label="Tra từ"></Button>
+        <Button className={globalStyles.componentSpace} onClick={handleClick} label="Tra từ" id="traTuBtn"></Button>
       </div>
       <div className={styles.centerFlex}>
         <List data={sentenceData as any} />
