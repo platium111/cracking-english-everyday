@@ -2,16 +2,21 @@ import * as React from 'react';
 import { getSentences } from './services';
 import { List, Button, Textfield, Select } from './components';
 import styles from './App.style.scss';
-import globalStyles from './_foundation/globalSpaces.scss';
+import globalStyles from './_foundation/styles/globalSpaces.scss';
+import { useExchangeMessage } from './_foundation';
+// import Frame, { FrameContextConsumer } from 'react-frame-component';
 
 export interface MainAppProps {
   appName: string;
+  appType?: string;
 }
 
 export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) => {
+  const { className: classNameProps, appType = 'web' } = props;
   const [sentenceData, setSentenceData] = React.useState([]);
   const searchTextRef = React.useRef(null);
   const [targetLanguage, setTargetLanguage] = React.useState('vi');
+  const { data: dataExchangeMessage } = useExchangeMessage('kĩ năng');
 
   const fetchSentences = async (searchValue: string, languageTarget: string) => {
     const result = await getSentences({ searchValue, languageTarget });
@@ -22,6 +27,14 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
   React.useEffect(() => {
     fetchSentences('kĩ năng', 'vi');
   }, []);
+
+  React.useEffect(() => {
+    const run = async () => {
+      searchTextRef.current.value = dataExchangeMessage;
+      await fetchSentences(dataExchangeMessage as string, targetLanguage);
+    };
+    run();
+  }, [dataExchangeMessage]);
 
   async function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === 'Enter') {
@@ -44,7 +57,7 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
   }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${classNameProps}`}>
       <h1>{props.appName}</h1>
       <div className={styles.centerFlex}>
         <Textfield

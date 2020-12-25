@@ -98,6 +98,8 @@ module.exports = {
       { from: path.resolve(__dirname, 'public', 'test.js'), to: path.resolve(__dirname, 'build') },
       { from: path.resolve(__dirname, 'public', 'background.js'), to: path.resolve(__dirname, 'build') },
       { from: path.resolve(__dirname, 'public', 'inject_script.js'), to: path.resolve(__dirname, 'build') },
+      { from: path.resolve(__dirname, 'public', 'contentScript.js'), to: path.resolve(__dirname, 'build') },
+      { from: path.resolve(__dirname, 'public', 'alignPopup.js'), to: path.resolve(__dirname, 'build') },
     ]),
   ],
 };

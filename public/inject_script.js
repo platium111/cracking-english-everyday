@@ -5,5 +5,4 @@ foreground_entry_point.id = 'foreground';
 reactJS_script.src = 'index-foreground.js';
 
 foreground_entry_point.appendChild(reactJS_script);
-
 document.querySelector('body').appendChild(foreground_entry_point);

@@ -84,4 +84,10 @@ X read more about code-splitting | https://webpack.js.org/guides/code-splitting/
 https://stackoverflow.com/questions/42148632/conflict-multiple-assets-emit-to-the-same-filename
 - [cannot_load_jsx_webpack] in test rule add more jsx into rule
 - [webpack_generating_css_from_scss] using s?(s|ss) in test rule
-- feat: inject component in every page in chrome using `background`
+- feat: inject component in every page in chrome using `background` | https://www.youtube.com/watch?v=nvm3c6ilcN8
+
+25/12/2020
+- [passing_message_content_background] using tab id when call sendMessage
+https://stackoverflow.com/questions/27924957/erratic-behavior-of-executescript-cannot-access-a-chrome-url-on-http-www
+
+- Send message from background to React | Using chrome.tab.sendMessage
