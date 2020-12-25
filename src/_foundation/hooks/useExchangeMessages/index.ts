@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { isMobile } from 'react-device-detect';
 export default function (input) {
   const [data, setData] = React.useState(input);
 
@@ -15,10 +15,12 @@ export default function (input) {
   }
 
   React.useEffect(() => {
-    chrome?.runtime?.onMessage?.addListener(setMessage);
-    return () => {
-      chrome.runtime.onMessage.removeListener(setMessage);
-    };
+    if (!isMobile) {
+      chrome?.runtime?.onMessage?.addListener(setMessage);
+      return () => {
+        chrome.runtime.onMessage.removeListener(setMessage);
+      };
+    }
   }, []);
 
   return { data };
