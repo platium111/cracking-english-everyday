@@ -9,7 +9,7 @@ export default function (input) {
           chrome.runtime.sendMessage(chrome.runtime.id, { target: 'app', type: 'setMessage', body: 'How are you' });
         }
       } */
-    if (request.selectedText) {
+    if (request?.selectedText) {
       setData(request.selectedText);
     }
   }

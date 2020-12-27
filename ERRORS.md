@@ -97,4 +97,13 @@ https://stackoverflow.com/questions/27924957/erratic-behavior-of-executescript-c
   chrome://inspect/#devices
   -> in `discover network target` need to add localhost:9000
 
+27/12/2020
 - todo fixing size responsive
+- [webpack_separating_css_js] in `use`, using MiniCssExtractPlugin.loader instead of style-loader
+- frame styling | using `react-frame-component`, so need to have refer to head with style pointing to index.css. This need to be configured in manifest by allowing resource
+- customise scrollbar | using `::webkit-scrollbar-thumb`
+reference to https://css-tricks.com/custom-scrollbars-in-webkit/
+- fixing font | using style in `Frame` component
+
+
+

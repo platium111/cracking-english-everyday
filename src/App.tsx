@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { getSentences } from './services';
-import { List, Button, Textfield, Select } from './components';
+import { List, Button, Textfield, Select, Frame } from './components';
 import styles from './App.style.scss';
 import globalStyles from './_foundation/styles/globalSpaces.scss';
-import { useExchangeMessage } from './_foundation';
-// import Frame, { FrameContextConsumer } from 'react-frame-component';
+import { APP_CONSTANTS, useExchangeMessage } from './_foundation';
 
 export interface MainAppProps {
   appName: string;
@@ -66,26 +65,29 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
     }
   }
 
+  // ! className is not working with iframe
   return (
-    <div className={`${styles.container} ${classNameProps}`}>
-      <h1>{props.appName}</h1>
-      <div className={styles.centerFlex}>
-        <Textfield
-          ref={searchTextRef}
-          onKeyDown={handleKeyDown}
-          className={styles.input}
-          placeholder="Search..."
-        ></Textfield>
-        <Select
-          onChange={handleSelect}
-          className={`${globalStyles.componentSpace}`}
-          data={DEFAUTL_LANGUAGE_OPTIONS}
-        ></Select>
-        <Button className={globalStyles.componentSpace} onClick={handleClick} label="Tra từ" id="traTuBtn"></Button>
+    <Frame appType={appType}>
+      <div className={`${styles.container} ${styles.scrollbar} ${classNameProps}`}>
+        <h1 className={appType === APP_CONSTANTS.appType.chrome && styles.h1Extension}>{props.appName}</h1>
+        <div className={styles.centerFlex}>
+          <Textfield
+            ref={searchTextRef}
+            onKeyDown={handleKeyDown}
+            className={styles.input}
+            placeholder="Search..."
+          ></Textfield>
+          <Select
+            onChange={handleSelect}
+            className={`${globalStyles.componentSpace}`}
+            data={DEFAUTL_LANGUAGE_OPTIONS}
+          ></Select>
+          <Button className={globalStyles.componentSpace} onClick={handleClick} label="Tra từ" id="traTuBtn"></Button>
+        </div>
+        <div className={styles.centerFlex}>
+          <List data={sentenceData as any} className={appType === APP_CONSTANTS.appType.chrome && styles.listOverriding} />
+        </div>
       </div>
-      <div className={styles.centerFlex}>
-        <List data={sentenceData as any} className={styles.listOverriding} />
-      </div>
-    </div>
+    </Frame>
   );
 };

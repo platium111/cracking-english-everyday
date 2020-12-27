@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const options = { fileName: 'asset-manifest.json' };
-console.log('clarkdir', __dirname);
+console.log('clark envi', isDevelopment);
 module.exports = {
   entry: {
     index: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -67,7 +67,7 @@ module.exports = {
       {
         test: /\.s?(a|c)ss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: { modules: true },
