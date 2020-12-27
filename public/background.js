@@ -37,7 +37,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       document.getElementById('foreground').style.zIndex = 9999;
       document.getElementById('foreground').style.backgroundImage = 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)';
       document.getElementById('foreground').style.backgroundRepeat = 'no-repeat';
-      document.getElementById('foreground').style.width = '28%';
+      document.getElementById('foreground').style.width = '400px';
       document.getElementById('foreground').style.display = 'inherit';
       `;
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {

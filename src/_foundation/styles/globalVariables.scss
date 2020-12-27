@@ -9,3 +9,7 @@ $base_word_red: #FF1D58;
 $screen_size_sm: 768px;
 $screen_size_md: 992px;
 $screen_size_lg: 1200px;
+
+:export {
+  screen_size_sm: $screen_size_sm;
+}

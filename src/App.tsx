@@ -11,12 +11,19 @@ export interface MainAppProps {
   appType?: string;
 }
 
+const DEFAULT_SEARCH_WORD = 'kĩ năng';
+const DEFAULT_TARGET_LANGUAGE = 'vi';
+const DEFAUTL_LANGUAGE_OPTIONS = [
+  { label: 'Vietnamese', value: 'vi' },
+  { label: 'English', value: 'en' },
+];
+
 export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) => {
-  const { className: classNameProps, appType = 'web' } = props;
+  const { className: classNameProps, appType } = props;
   const [sentenceData, setSentenceData] = React.useState([]);
   const searchTextRef = React.useRef(null);
-  const [targetLanguage, setTargetLanguage] = React.useState('vi');
-  const { data: dataExchangeMessage } = useExchangeMessage('kĩ năng');
+  const [targetLanguage, setTargetLanguage] = React.useState(DEFAULT_TARGET_LANGUAGE);
+  const { data: dataExchangeMessage } = useExchangeMessage(DEFAULT_SEARCH_WORD);
 
   const fetchSentences = async (searchValue: string, languageTarget: string) => {
     const result = await getSentences({ searchValue, languageTarget });
@@ -25,7 +32,7 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
   };
 
   React.useEffect(() => {
-    fetchSentences('kĩ năng', 'vi');
+    fetchSentences(DEFAULT_SEARCH_WORD, DEFAULT_TARGET_LANGUAGE);
   }, []);
 
   React.useEffect(() => {
@@ -33,7 +40,10 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
       searchTextRef.current.value = dataExchangeMessage;
       await fetchSentences(dataExchangeMessage as string, targetLanguage);
     };
-    run();
+
+    if (dataExchangeMessage) {
+      run();
+    }
   }, [dataExchangeMessage]);
 
   async function handleKeyDown(e: React.KeyboardEvent) {
@@ -68,16 +78,13 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
         ></Textfield>
         <Select
           onChange={handleSelect}
-          className={globalStyles.componentSpace}
-          data={[
-            { label: 'Vietnamese', value: 'vi' },
-            { label: 'English', value: 'en' },
-          ]}
+          className={`${globalStyles.componentSpace}`}
+          data={DEFAUTL_LANGUAGE_OPTIONS}
         ></Select>
         <Button className={globalStyles.componentSpace} onClick={handleClick} label="Tra từ" id="traTuBtn"></Button>
       </div>
       <div className={styles.centerFlex}>
-        <List data={sentenceData as any} />
+        <List data={sentenceData as any} className={styles.listOverriding} />
       </div>
     </div>
   );

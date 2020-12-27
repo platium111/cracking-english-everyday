@@ -10,9 +10,9 @@ export interface IListProps {
   data: { sentences: [IListItem] };
 }
 
-export default function ({ data }: IListProps) {
+export default function ({ data, className: classNameProp }: IListProps & React.HTMLAttributes<HTMLDataListElement>) {
   return (
-    <div className={styles.list}>
+    <div className={`${styles.list} ${classNameProp}`}>
       {data?.sentences?.map((item) => {
         return (
           <div key={item._id} className={styles.item}>

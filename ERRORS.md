@@ -91,3 +91,10 @@ https://stackoverflow.com/questions/42148632/conflict-multiple-assets-emit-to-th
 https://stackoverflow.com/questions/27924957/erratic-behavior-of-executescript-cannot-access-a-chrome-url-on-http-www
 
 - Send message from background to React | Using chrome.tab.sendMessage
+- Debug chrome in mobile | 
+  npm install remotedebug-ios-webkit-adapter -g
+  remotedebug_ios_webkit_adapter --port=9000
+  chrome://inspect/#devices
+  -> in `discover network target` need to add localhost:9000
+
+- todo fixing size responsive

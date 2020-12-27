@@ -12,3 +12,9 @@ h1 {
   display: flex;
   justify-content: center;
 }
+
+.listOverriding {
+  @media screen and (min-width: $screen_size_sm) {
+    width: 100%;
+  }
+}
