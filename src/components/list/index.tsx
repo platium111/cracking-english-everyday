@@ -11,6 +11,9 @@ export interface IListProps {
 }
 
 export default function ({ data, className: classNameProp }: IListProps & React.HTMLAttributes<HTMLDataListElement>) {
+  if ((data.sentences.length as any) === 0) {
+    return <div className={`${styles.list} ${styles.notFound} ${classNameProp}`}>Không tim thấy câu nào</div>;
+  }
   return (
     <div className={`${styles.list} ${classNameProp}`}>
       {data?.sentences?.map((item) => {
