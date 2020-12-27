@@ -4,6 +4,9 @@ import { List, Button, Textfield, Select, Frame } from './components';
 import styles from './App.style.scss';
 import globalStyles from './_foundation/styles/globalSpaces.scss';
 import { APP_CONSTANTS, useExchangeMessage } from './_foundation';
+import Loader from 'react-loader-spinner';
+
+const ListLazy = React.lazy(() => import('./components/list'));
 
 export interface MainAppProps {
   appName: string;
@@ -24,10 +27,20 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
   const [targetLanguage, setTargetLanguage] = React.useState(DEFAULT_TARGET_LANGUAGE);
   const { data: dataExchangeMessage } = useExchangeMessage(DEFAULT_SEARCH_WORD);
 
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState();
+
   const fetchSentences = async (searchValue: string, languageTarget: string) => {
-    const result = await getSentences({ searchValue, languageTarget });
-    console.log('result', result);
-    setSentenceData(result.data as any);
+    setLoading(true);
+    try {
+      const result = await getSentences({ searchValue, languageTarget });
+      console.log('result', result);
+      setSentenceData(result.data as any);
+      setLoading(false);
+    } catch (ex) {
+      setError(ex);
+      setLoading(false);
+    }
   };
 
   React.useEffect(() => {
@@ -36,7 +49,7 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
 
   React.useEffect(() => {
     const run = async () => {
-      searchTextRef.current.value = dataExchangeMessage;
+      searchTextRef.current.value = dataExchangeMessage || '';
       await fetchSentences(dataExchangeMessage as string, targetLanguage);
     };
 
@@ -65,6 +78,8 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
     }
   }
 
+  if (error) return <div>Internet connect failed or API failed</div>;
+
   // ! className is not working with iframe
   return (
     <Frame appType={appType}>
@@ -85,7 +100,16 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
           <Button className={globalStyles.componentSpace} onClick={handleClick} label="Tra từ" id="traTuBtn"></Button>
         </div>
         <div className={styles.centerFlex}>
-          <List data={sentenceData as any} className={appType === APP_CONSTANTS.appType.chrome && styles.listOverriding} />
+          {loading ? (
+            <Loader type="Oval" color="#00BFFF" height={48} width={48} style={{ marginTop: '20px' }} />
+          ) : (
+            <React.Suspense fallback={<Loader type="Oval" color="#00BFFF" height={48} width={48} />}>
+              <ListLazy
+                data={sentenceData as any}
+                className={appType === APP_CONSTANTS.appType.chrome && styles.listOverriding}
+              />
+            </React.Suspense>
+          )}
         </div>
       </div>
     </Frame>

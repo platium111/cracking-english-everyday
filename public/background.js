@@ -31,6 +31,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     // r.right - relative.right
     const code = `
       document.getElementById('foreground-app').style.display = 'inherit';
+      document.getElementById('foreground-app').style.width = '100%';
       document.getElementById('foreground').style.top = '${r.bottom - relative.top}px';
       document.getElementById('foreground').style.right = '-${r.right - relative.right}px';
       document.getElementById('foreground').style.position='absolute';

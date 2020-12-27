@@ -106,6 +106,6 @@ reference to https://css-tricks.com/custom-scrollbars-in-webkit/
 styling https://css-tricks.com/the-current-state-of-styling-scrollbars/
 
 - fixing font | using style in `Frame` component
-
+- lazy loading only for code-splitting, if want to spinning need to use hook with loading status and error
 
 
