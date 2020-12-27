@@ -103,6 +103,8 @@ https://stackoverflow.com/questions/27924957/erratic-behavior-of-executescript-c
 - frame styling | using `react-frame-component`, so need to have refer to head with style pointing to index.css. This need to be configured in manifest by allowing resource
 - customise scrollbar | using `::webkit-scrollbar-thumb`
 reference to https://css-tricks.com/custom-scrollbars-in-webkit/
+styling https://css-tricks.com/the-current-state-of-styling-scrollbars/
+
 - fixing font | using style in `Frame` component
 
 
