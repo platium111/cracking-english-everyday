@@ -108,4 +108,7 @@ styling https://css-tricks.com/the-current-state-of-styling-scrollbars/
 - fixing font | using style in `Frame` component
 - lazy loading only for code-splitting, if want to spinning need to use hook with loading status and error
 
-
+28/12/2020
+- using font, images loading local | using url-loader, or file-loader -> add assets file into src/assets or something, from here in jsx file we can using `import` or `url(../assets)`
+* even we configure to output in `build` folder, we can't using in src folder React component
+- using `link` and refer to google font, then using immediately with `font-family`, not using it in `iframe`, using in child 

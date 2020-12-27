@@ -4,6 +4,10 @@
   margin: 0 auto;
 }
 
+.globalFont {
+  font-family: 'Quicksand';
+}
+
 h1 {
   color: brown
 }
@@ -45,4 +49,18 @@ h1 {
 									   color-stop(0.44, rgb(122,153,217)),
 									   color-stop(0.72, rgb(73,125,189)),
 									   color-stop(0.86, rgb(28,58,148)));
+}
+
+img {
+  width: 160px;
+  margin-top: 20px;
+  margin: 0;
+}
+
+#footer, .footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  color: brown;
 }

@@ -75,6 +75,20 @@ module.exports = {
           'sass-loader',
         ],
       },
+      {
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
+        loader: 'url-loader?limit=30000&name=[name].[ext]',
+        options: {
+          publicPath: 'fonts/',
+        },
+      },
+      {
+        test: /\.(jpg|png|svg)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 25000,
+        },
+      },
     ],
   },
   optimization: {

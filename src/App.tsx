@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { getSentences } from './services';
-import { List, Button, Textfield, Select, Frame } from './components';
+import { Button, Textfield, Select, Frame } from './components';
 import styles from './App.style.scss';
+import './App.style.scss';
+
 import globalStyles from './_foundation/styles/globalSpaces.scss';
 import { APP_CONSTANTS, useExchangeMessage } from './_foundation';
 import Loader from 'react-loader-spinner';
+
+const Banner = require('./assets/banner.png');
 
 const ListLazy = React.lazy(() => import('./components/list'));
 
@@ -53,7 +57,7 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
       await fetchSentences(dataExchangeMessage as string, targetLanguage);
     };
 
-    if (dataExchangeMessage) {
+    if (dataExchangeMessage && searchTextRef?.current) {
       run();
     }
   }, [dataExchangeMessage]);
@@ -83,7 +87,11 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
   // ! className is not working with iframe
   return (
     <Frame appType={appType}>
-      <div className={`${styles.container} ${styles.scrollbar} ${classNameProps}`}>
+      <div
+        className={`${styles.container} ${styles.scrollbar} ${
+          appType === APP_CONSTANTS.appType.chrome && styles.globalFont
+        } ${classNameProps}`}
+      >
         <h1 className={appType === APP_CONSTANTS.appType.chrome && styles.h1Extension}>{props.appName}</h1>
         <div className={styles.centerFlex}>
           <Textfield
@@ -110,6 +118,10 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
               />
             </React.Suspense>
           )}
+        </div>
+        <div id="footer" className={styles.footer}>
+          <img src={Banner} alt="Ảnh banner bị lỗi" />
+          <span className={`${globalStyles.componentSpace}`}>Developed by Clark</span>
         </div>
       </div>
     </Frame>
