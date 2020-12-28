@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --config ./webpack.dev.cjs",
     "build": "webpack --config ./webpack.dev.cjs",
-    "build:prod": "webpack --config webpack.prod.js",
+    "build:prod": "webpack --config webpack.prod.cjs",
     "build:extension": "rm -rf build && bash ./script/build.sh",
     "server": "node-env-run server --exec nodemon | pino-colada",
     "proxy": "http://localhost:3001",
