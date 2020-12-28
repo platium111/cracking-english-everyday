@@ -18,7 +18,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["contentScript.js", "alignPopup.js", "index.css"]
+      "js": ["contentScript.js", "index.css"]
     }
   ],
   "permissions": [

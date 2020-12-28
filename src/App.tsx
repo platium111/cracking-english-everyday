@@ -8,8 +8,6 @@ import globalStyles from './_foundation/styles/globalSpaces.scss';
 import { APP_CONSTANTS, useExchangeMessage } from './_foundation';
 import Loader from 'react-loader-spinner';
 
-import Banner from './assets/banner.png';
-
 const ListLazy = React.lazy(() => import('./components/list'));
 
 export interface MainAppProps {
@@ -38,7 +36,6 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
     setLoading(true);
     try {
       const result = await getSentences({ searchValue, languageTarget });
-      console.log('result', result);
       setSentenceData(result.data as any);
       setLoading(false);
     } catch (ex) {

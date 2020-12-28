@@ -27,7 +27,6 @@ function sendMessage() {
       isEscape = evt.keyCode === 27;
     }
     if (isEscape) {
-      console.log('going to escape');
       const foregroundEle = document.getElementById('foreground');
       foregroundEle.style.display = 'none';
     }

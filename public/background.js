@@ -19,9 +19,6 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  console.log('onMessage is trigger. ', request);
-  console.log('onMessage is sender. ', sender);
-  console.log('onMessage is sendResponse. ', sendResponse);
   // ! dont put element object here
   const { selectedText, position: { r, relative } = {} } = request || {};
 
