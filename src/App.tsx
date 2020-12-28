@@ -8,7 +8,7 @@ import globalStyles from './_foundation/styles/globalSpaces.scss';
 import { APP_CONSTANTS, useExchangeMessage } from './_foundation';
 import Loader from 'react-loader-spinner';
 
-const Banner = require('./assets/banner.png');
+import Banner from './assets/banner.png';
 
 const ListLazy = React.lazy(() => import('./components/list'));
 
@@ -92,7 +92,9 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
           appType === APP_CONSTANTS.appType.chrome && styles.globalFont
         } ${classNameProps}`}
       >
-        <h1 className={appType === APP_CONSTANTS.appType.chrome && styles.h1Extension}>{props.appName}</h1>
+        {appType !== APP_CONSTANTS.appType.chrome && (
+          <h1 className={appType === APP_CONSTANTS.appType.chrome && styles.h1Extension}>{props.appName}</h1>
+        )}
         <div className={styles.centerFlex}>
           <Textfield
             ref={searchTextRef}
@@ -120,7 +122,10 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
           )}
         </div>
         <div id="footer" className={styles.footer}>
-          <img src={Banner} alt="Ảnh banner bị lỗi" />
+          <img
+            src={appType === APP_CONSTANTS.appType.chrome ? chrome.runtime.getURL('images/banner.png') : 'images/banner.png'}
+            alt="Ảnh banner bị lỗi"
+          />
           <span className={`${globalStyles.componentSpace}`}>Developed by Clark</span>
         </div>
       </div>

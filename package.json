@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config ./webpack.config.cjs",
-    "build": "webpack --config ./webpack.config.cjs --mode production",
+    "start": "webpack-dev-server --open --config ./webpack.dev.cjs",
+    "build": "webpack --config ./webpack.dev.cjs --mode production",
     "build:extension": "rm -rf build && bash ./script/build.sh",
     "server": "node-env-run server --exec nodemon | pino-colada",
     "proxy": "http://localhost:3001",
@@ -50,7 +50,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.7.3"
   },
   "dependencies": {
     "@types/chrome": "0.0.127",

@@ -9,7 +9,7 @@
 
 11/10/2020
 
-- webpack.config.mjs
+- webpack.dev.mjs
 - script using webpac with --config
 - type: module in package.json
 
