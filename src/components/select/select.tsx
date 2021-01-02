@@ -5,9 +5,9 @@ export default function (props) {
   return (
     <select className={`${styles.Select} ${className}`} onChange={onChange}>
       {data &&
-        data.map((option) => {
+        data.map((option, index) => {
           const { label, value } = option;
-          return <option value={value}>{label}</option>;
+          return <option key={index} value={value}>{label}</option>;
         })}
     </select>
   );

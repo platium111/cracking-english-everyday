@@ -106,6 +106,9 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
           ></Select>
           <Button className={globalStyles.componentSpace} onClick={handleClick} label="Tra từ" id="traTuBtn"></Button>
         </div>
+        {appType === APP_CONSTANTS.appType.chrome && (
+          <div className={`${styles.inforText} ${globalStyles.verticalSpace}`}>! Nhấn ESC để đóng tra từ</div>
+        )}
         <div className={styles.centerFlex}>
           {loading ? (
             <Loader type="Oval" color="#00BFFF" height={48} width={48} style={{ marginTop: '20px' }} />

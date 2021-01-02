@@ -5,13 +5,12 @@ window.onload = function () {
 function sendMessage() {
   document.onmouseup = () => {
     const selectionText = window.getSelection().toString()?.trim();
-
     var r = window.getSelection().getRangeAt(0).getBoundingClientRect();
     var relative = document.body.parentNode.getBoundingClientRect();
 
     // ! error if doing const translatePopupEle = document.getElementById('foreground-app');
     if (selectionText) {
-      chrome.runtime.sendMessage({ selectedText: selectionText, position: { r, relative } }, function (response) {
+      chrome?.runtime?.sendMessage({ selectedText: selectionText, position: { r, relative } }, function (response) {
         console.log('respond from sendMessage', response);
       });
       return true;

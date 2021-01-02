@@ -5,6 +5,7 @@ chrome.runtime.onInstalled.addListener(function () {
     title: 'Cracking English by Clark',
     contexts: ['selection'],
   });
+  return true;
 });
 
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
@@ -16,21 +17,29 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
       });
     });
   }
+  return true;
 });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // ! dont put element object here
-  const { selectedText, position: { r, relative } = {} } = request || {};
+  const { selectedText, position: { r, relative } = {}, action, value } = request || {};
+
+  if (action === 'close' && value === 'foregroundApp') {
+    const code = `document.getElementById('foreground-app').style.display = 'none';`;
+    chrome.tabs.executeScript(sender.tab.id, {
+      code: code,
+    });
+  }
 
   if (selectedText?.trim()) {
     console.log('listener received text', selectedText);
     // ! cannot use ES6 here, only javascript
     // r.right - relative.right
     const code = `
-      document.getElementById('foreground-app').style.display = 'inherit';
+      document.getElementById('foreground-app').style.display = 'block';
       document.getElementById('foreground-app').style.width = '100%';
       document.getElementById('foreground').style.top = '${r.bottom - relative.top}px';
-      document.getElementById('foreground').style.right = '-${r.right - relative.right}px';
+      document.getElementById('foreground').style.left = '${r.x}px';
       document.getElementById('foreground').style.position='absolute';
       document.getElementById('foreground').style.zIndex = 9999;
       document.getElementById('foreground').style.backgroundImage = 'linear-gradient(to top, #a8edea 0%, #fed6e3 100%)';
@@ -51,4 +60,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       code: code,
     });
   }
+
+  // ! need this to not have close port errors
+  sendResponse({});
+  return true;
 });
