@@ -3,17 +3,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 require('dotenv').config();
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const options = { fileName: 'asset-manifest.json' };
+const manifestOptions = { fileName: 'asset-manifest.json' };
 
 console.log('clark env is dev', isDevelopment);
 
 module.exports = {
   entry: {
-    index: path.resolve(__dirname, 'src', 'index.tsx'),
-    'index-foreground': ['./src/index-foreground.jsx'],
+    index: path.resolve(__dirname, 'src', 'index.tsx'), // normal web
+    'index-foreground': ['./src/index-foreground.jsx'], // serving chrome extension
   },
   target: 'web',
   output: {
@@ -21,11 +23,13 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[id].js',
   },
+  // nếu assets, entry points có size lớn thì sẽ notice
   performance: {
-    hints: false,
+    hints: false, // off because default là production
     maxEntrypointSize: 400000,
     maxAssetSize: 400000,
   },
+  // when import in react, don't need .js .ts -> auto finding
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx', '.scss'],
   },
@@ -97,6 +101,7 @@ module.exports = {
     runtimeChunk: false,
   },
   plugins: [
+    // tạo HTML file để phục vụ bundle (có bundle file .js trong đó), nó sẽ lấy file html nguồn rồi inject bundle file vào
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
     }),
@@ -104,7 +109,8 @@ module.exports = {
       filename: isDevelopment ? '[name].css' : '[name].[hash].css',
       chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
     }),
-    new WebpackManifestPlugin(options),
+    new WebpackManifestPlugin(manifestOptions),
+    new BundleAnalyzerPlugin(),
     new CopyPlugin([
       { from: path.resolve(__dirname, 'public', 'manifest.json'), to: path.resolve(__dirname, 'build') },
       {
