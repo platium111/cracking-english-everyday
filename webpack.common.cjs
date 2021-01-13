@@ -7,10 +7,11 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 require('dotenv').config();
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+// ! ko nên dùng process.env.NODE_ENV trong webpack -> dùng `mode: production` ...
+// const isDevelopment = process.env.NODE_ENV === 'development';
 const manifestOptions = { fileName: 'asset-manifest.json' };
 
-console.log('clark env is dev', isDevelopment);
+// console.log('clark env is dev', isDevelopment);
 
 module.exports = {
   entry: {
@@ -52,19 +53,19 @@ module.exports = {
       {
         test: /\.module\.s(a|c)ss$/,
         loader: [
-          isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               modules: true,
-              sourceMap: isDevelopment,
-              minimize: !isDevelopment,
+              sourceMap: false,
+              minimize: true,
             },
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: isDevelopment,
+              sourceMap: false,
             },
           },
         ],
@@ -105,12 +106,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
     }),
-    new MiniCssExtractPlugin({
-      filename: isDevelopment ? '[name].css' : '[name].[hash].css',
-      chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css',
-    }),
     new WebpackManifestPlugin(manifestOptions),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new CopyPlugin([
       { from: path.resolve(__dirname, 'public', 'manifest.json'), to: path.resolve(__dirname, 'build') },
       {

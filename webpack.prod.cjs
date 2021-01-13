@@ -1,9 +1,11 @@
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.cjs');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
   optimization: {
+    // entrypoint sẽ đc chạy với manifest (gồm data liên quan đến các file và path)
     runtimeChunk: {
       name: 'manifest',
     },
@@ -22,4 +24,11 @@ module.exports = merge(common, {
       },
     },
   },
+
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].[hash].css',
+    }),
+  ],
 });
