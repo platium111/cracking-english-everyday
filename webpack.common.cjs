@@ -8,10 +8,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 require('dotenv').config();
 
 // ! ko nên dùng process.env.NODE_ENV trong webpack -> dùng `mode: production` ...
-// const isDevelopment = process.env.NODE_ENV === 'development';
-const manifestOptions = { fileName: 'asset-manifest.json' };
-
-// console.log('clark env is dev', isDevelopment);
 
 module.exports = {
   entry: {
@@ -36,31 +32,30 @@ module.exports = {
   },
   module: {
     rules: [
+      // transpiling Javascript vd từ react, es2015+ đến ES5 -> kết hơp .babelrc để config @babel/preset-env", "@babel/preset-react
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
+      // dùng để load typescipt file, better than awesome-type-script
       {
         test: /\.(ts|tsx)$/,
-        loader: 'awesome-typescript-loader',
+        loader: 'ts-loader',
       },
+      // sourcemap dùng cho extract source map từ origninal file -> source map giúp cho debug
       {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'source-map-loader',
       },
       {
-        test: /\.module\.s(a|c)ss$/,
-        loader: [
+        test: /\.s?(a|c)ss$/,
+        use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: {
-              modules: true,
-              sourceMap: false,
-              minimize: true,
-            },
+            options: { modules: true, sourceMap: false },
           },
           {
             loader: 'sass-loader',
@@ -70,17 +65,7 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.s?(a|c)ss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: { modules: true },
-          },
-          'sass-loader',
-        ],
-      },
+      // ! publicPath is not sure working now
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
         loader: 'url-loader?limit=30000&name=[name].[ext]',
@@ -98,25 +83,27 @@ module.exports = {
       },
     ],
   },
-  optimization: {
-    runtimeChunk: false,
-  },
   plugins: [
     // tạo HTML file để phục vụ bundle (có bundle file .js trong đó), nó sẽ lấy file html nguồn rồi inject bundle file vào
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
     }),
-    new WebpackManifestPlugin(manifestOptions),
+    new WebpackManifestPlugin({ fileName: 'asset-manifest.json' }),
     // new BundleAnalyzerPlugin(),
+    // ! chỉ copy từ src folder đến build folder, ko nên copy trong build folder
+    // todo thay đổi trong webpack 5, không dùng [] mà dùng {}
     new CopyPlugin([
       { from: path.resolve(__dirname, 'public', 'manifest.json'), to: path.resolve(__dirname, 'build') },
+      // banner, logo, images... được đặt trong public sẽ đc organise lại trong `build`
       {
         from: 'public/*.png',
         to: 'images/[name].[ext]',
       },
       { from: path.resolve(__dirname, 'public', 'test.js'), to: path.resolve(__dirname, 'build') },
-      { from: path.resolve(__dirname, 'public', 'background.js'), to: path.resolve(__dirname, 'build') },
+      // inject_script để lấy `index-foreground.js` (chrome react app đc generate bởi webpack entry) để append vào <body>
       { from: path.resolve(__dirname, 'public', 'inject_script.js'), to: path.resolve(__dirname, 'build') },
+      // middleware cho chrome listener để giao tiếp chrome extension và react
+      { from: path.resolve(__dirname, 'public', 'background.js'), to: path.resolve(__dirname, 'build') },
       { from: path.resolve(__dirname, 'public', 'contentScript.js'), to: path.resolve(__dirname, 'build') },
     ]),
   ],
