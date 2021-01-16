@@ -96,7 +96,7 @@ module.exports = {
       { from: path.resolve(__dirname, 'public', 'manifest.json'), to: path.resolve(__dirname, 'build') },
       // banner, logo, images... được đặt trong public sẽ đc organise lại trong `build`
       {
-        from: 'public/*.png',
+        from: 'public/images/*.png',
         to: 'images/[name].[ext]',
       },
       { from: path.resolve(__dirname, 'public', 'test.js'), to: path.resolve(__dirname, 'build') },
