@@ -1,4 +1,4 @@
-// backround.js sẽ luôn đc chạy 
+// backround.js sẽ luôn đc chạy
 
 chrome.runtime.onInstalled.addListener(function () {
   console.log('onInstall event is created');
@@ -16,7 +16,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (changeInfo.status === 'complete') {
     chrome.tabs.executeScript(tabId, { file: './inject_script.js' }, function () {
       chrome.tabs.executeScript(tabId, { file: './index-foreground.js' }, function () {
-        console.log('INJECTED AND EXECUTED');
+        console.log('index-foreground.js is INJECTED AND EXECUTED');
       });
     });
   }

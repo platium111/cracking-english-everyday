@@ -6,6 +6,7 @@
   "icons": {
     "512": "./images/superdev.png"
   },
+  "options_page": "./options.html",
   "browser_action": {
     "default_icon": "./images/superdev.png",
     "default_popup": "popup.html",

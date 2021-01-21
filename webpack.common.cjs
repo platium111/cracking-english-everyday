@@ -13,6 +13,7 @@ module.exports = {
   entry: {
     index: path.resolve(__dirname, 'src', 'index.tsx'), // normal web
     'index-foreground': ['./src/index-foreground.jsx'], // serving chrome extension
+    options: path.resolve(__dirname, './src/index-options.jsx'), // want to have options.js separated for options.html -> using HtmlWebpackPlugin to inject to HTML
   },
   target: 'web',
   output: {
@@ -87,6 +88,11 @@ module.exports = {
     // tạo HTML file để phục vụ bundle (có bundle file .js trong đó), nó sẽ lấy file html nguồn rồi inject bundle file vào
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'options.html',
+      template: 'public/options.html',
+      chunks: ['options'],
     }),
     new WebpackManifestPlugin({ fileName: 'asset-manifest.json' }),
     // new BundleAnalyzerPlugin(),
