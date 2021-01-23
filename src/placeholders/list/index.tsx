@@ -5,7 +5,7 @@ import styles from './index.scss';
 export default function ({ className }: React.HTMLAttributes<HTMLDataListElement>) {
   return (
     <div className={`${listStyles.list} ${className}`}>
-      {Array(6)
+      {Array(10)
         .fill(0)
         .map((_) => {
           return (
