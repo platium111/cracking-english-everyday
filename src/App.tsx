@@ -7,7 +7,7 @@ import './App.style.scss';
 import globalStyles from './_foundation/styles/globalSpaces.scss';
 import { APP_CONSTANTS, useExchangeMessage } from './_foundation';
 import Loader from 'react-loader-spinner';
-
+import { createSkeleton, ListSkeleton } from './placeholders';
 const ListLazy = React.lazy(() => import('./components/list'));
 
 export interface MainAppProps {
@@ -21,6 +21,8 @@ const DEFAUTL_LANGUAGE_OPTIONS = [
   { label: 'Vietnamese', value: 'vi' },
   { label: 'English', value: 'en' },
 ];
+
+const EnhanceListSkeleton = createSkeleton(ListSkeleton, {});
 
 export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) => {
   const { className: classNameProps, appType } = props;
@@ -111,14 +113,16 @@ export const App = (props: MainAppProps & React.HTMLAttributes<HTMLDivElement>) 
         )}
         <div className={styles.centerFlex}>
           {loading ? (
-            <Loader type="Oval" color="#00BFFF" height={48} width={48} style={{ marginTop: '20px' }} />
+            <EnhanceListSkeleton />
           ) : (
-            <React.Suspense fallback={<Loader type="Oval" color="#00BFFF" height={48} width={48} />}>
-              <ListLazy
-                data={sentenceData as any}
-                className={appType === APP_CONSTANTS.appType.chrome && styles.listOverriding}
-              />
-            </React.Suspense>
+            <>
+              <React.Suspense fallback={<Loader type="Oval" color="#00BFFF" height={48} width={48} />}>
+                <ListLazy
+                  data={sentenceData as any}
+                  className={appType === APP_CONSTANTS.appType.chrome && styles.listOverriding}
+                />
+              </React.Suspense>
+            </>
           )}
         </div>
         <div id="footer" className={styles.footer}>

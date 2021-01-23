@@ -18,7 +18,7 @@ export default function (input) {
     if (!isMobile && !isFirefox) {
       chrome?.runtime?.onMessage?.addListener(setMessage);
       return () => {
-        chrome.runtime.onMessage.removeListener(setMessage);
+        chrome?.runtime?.onMessage?.removeListener(setMessage);
       };
     }
   }, []);
