@@ -1,15 +1,26 @@
+@import '../../_foundation/styles/globalVariables.scss';
+
 .item {
   height: 42px;
 }
 
 .foundLanguage {
   background-color: #babbbc;
-  width: 20%;
+  width: 40%;
+
+  @media screen and (min-width: $screen_size_md) {
+    width: 30%;
+  }
 }
 
 .targetLanguage {
   margin-top: 4px;
   margin-bottom: 4px;
   background-color: #babbbc;
-  width: 40%;
+  width: 60%;
+
+  @media screen and (min-width: $screen_size_md) {
+    width: 40%;
+  }
 }
+
